@@ -1,8 +1,9 @@
 import LogoWhite from '../../assets/logo_white.svg';
 import styled from 'styled-components';
+import colors from '../../utils/style/colors';
 
 const FooterContainer = styled.footer`
-  background-color: black;
+  background-color: ${colors.background};
   text-align: center;
   line-height: 5em;
 `;

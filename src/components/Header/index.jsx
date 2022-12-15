@@ -2,16 +2,18 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledLink } from '../../utils/style/Atoms';
 import logo from '../../assets/logo.svg';
-
-const HomeLogo = styled.img`
-  height: 68px;
-`;
+import colors from '../../utils/style/colors';
 
 const NavContainer = styled.nav`
-  padding: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 5em;
+  padding: 2em 0;
+`;
+
+const HomeLogo = styled.img`
+  height: 68px;
 `;
 
 function Header() {

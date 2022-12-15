@@ -1,14 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
 
-const StyledGlobalStyle = createGlobalStyle`;
+const StyledGlobalStyle = createGlobalStyle`
     * {
-        font-family: 'Montserrat', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
 
     body {
-        margin: 0;
-        padding: 0;
-      }
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    main {
+      display:flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: space-between;
+      margin: 0 5em;
+    }
 `;
 
 function GlobalStyle() {
