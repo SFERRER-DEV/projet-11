@@ -3,6 +3,7 @@ import PictureBanner from '../../assets/home_banner.png';
 import styled from 'styled-components';
 import colors from '../../utils/style/colors';
 import { Loader } from '../../utils/style/Atoms';
+import CardHousing from '../../components/CardHousing';
 
 // Le conteneur de la bannière image et titre
 const Container = styled.div`
@@ -35,12 +36,13 @@ const Heading = styled.h1`
 `;
 
 const Section = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 3em;
+  column-gap: 3em;
   width: 100%;
   background-color: ${colors.tertiary};
-  padding: 5em 15em;
+  padding: 4em 3em;
   max-width: 1240px;
   border-radius: 0.5em;
   margin: 2em 0;
@@ -80,12 +82,14 @@ function Home() {
         <Heading>Chez vous, partout et ailleurs</Heading>
       </Container>
       <Section>
-        {isDataLoading ? <Loader /> : <h2>Logements: {housingData.length}</h2>}
         {housingData.map((housing, index) => (
-          <p style={{ width: '100%' }} key={1000 + index}>
-            <h2>{housing.id}</h2>
-            <h2>{housing.title}</h2>
-          </p>
+          <CardHousing
+            key={housing.id}
+            link={`/housing/${housing.id}`}
+            title={housing.title}
+            alt={`${housing.host.name} - ${housing.location}`}
+            cover={housing.cover}
+          />
         ))}
       </Section>
     </main>
