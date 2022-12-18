@@ -9,29 +9,32 @@ import Footer from './components/Footer';
 import Error from './components/Error';
 import './styles/index.css';
 import GlobalStyle from './utils/style/GlobalStyle';
+import { HousingProvider } from './utils/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
     <Router>
-      <GlobalStyle />
-      <Header />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/housing">
-          <Housing />
-        </Route>
-        <Route path="/About">
-          <About />
-        </Route>
-        <Route>
-          <Error />
-        </Route>
-      </Switch>
-      <Footer />
+      <HousingProvider>
+        <GlobalStyle />
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/housing">
+            <Housing />
+          </Route>
+          <Route path="/About">
+            <About />
+          </Route>
+          <Route>
+            <Error />
+          </Route>
+        </Switch>
+        <Footer />
+      </HousingProvider>
     </Router>
   </React.StrictMode>
 );

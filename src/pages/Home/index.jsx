@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PictureBanner from '../../assets/home_banner.png';
 import styled from 'styled-components';
 import colors from '../../utils/style/colors';
 import { Loader } from '../../utils/style/Atoms';
 import CardHousing from '../../components/CardHousing';
+import { HousingContext } from '../../utils/context';
 
 // Le conteneur de la bannière image et titre
 const Container = styled.div`
@@ -35,7 +36,7 @@ const Heading = styled.h1`
   justify-content: center;
 `;
 
-const Section = styled.section`
+const CardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 3em;
@@ -48,28 +49,28 @@ const Section = styled.section`
   margin: 2em 0;
 `;
 
-function Home() {
-  const [housingData, setHousingData] = useState([]);
-  const [isDataLoading, setDataLoading] = useState(false);
-  const [error, setError] = useState(false);
+const LoaderWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  height: 15em;
+`;
 
+function Home() {
+  const { isDataLoading, housingData, error } = useContext(HousingContext);
+  // Permet d'afficher l'animation lors du chargement des données
+  const [seconds, setSeconds] = useState(1);
+  // Temporiser avant d'afficher les logements
   useEffect(() => {
-    async function fetchHousing() {
-      setDataLoading(true);
-      try {
-        const response = await fetch(`/data/logements.json`);
-        const { housingData } = await response.json();
-        setHousingData(housingData);
-      } catch (err) {
-        console.log(err);
-        setError(true);
-      } finally {
-        setDataLoading(false);
-        console.log(housingData);
-      }
-    }
-    fetchHousing();
-  }, []);
+    console.log(`setInterval(${seconds})`);
+    const interval = setInterval(() => {
+      if (seconds > 0) setSeconds((seconds) => seconds - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [seconds]);
+
+  console.log(`Home: ${isDataLoading}`);
 
   if (error) {
     return <span>Oups il y a eu un problème</span>;
@@ -81,17 +82,25 @@ function Home() {
         <Banner src={PictureBanner} alt="banner" />
         <Heading>Chez vous, partout et ailleurs</Heading>
       </Container>
-      <Section>
-        {housingData.map((housing, index) => (
-          <CardHousing
-            key={housing.id}
-            link={`/housing/${housing.id}`}
-            title={housing.title}
-            alt={`${housing.host.name} - ${housing.location}`}
-            cover={housing.cover}
-          />
-        ))}
-      </Section>
+      <section>
+        {seconds > 0 || isDataLoading ? (
+          <LoaderWrapper>
+            <Loader />
+          </LoaderWrapper>
+        ) : (
+          <CardWrapper>
+            {housingData.map((housing, index) => (
+              <CardHousing
+                key={housing.id}
+                link={`/housing/${housing.id}`}
+                title={housing.title}
+                alt={`${housing.host.name} - ${housing.location}`}
+                cover={housing.cover}
+              />
+            ))}
+          </CardWrapper>
+        )}
+      </section>
     </main>
   );
 }
