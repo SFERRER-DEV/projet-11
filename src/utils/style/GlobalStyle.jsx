@@ -13,11 +13,21 @@ const StyledGlobalStyle = createGlobalStyle`
 
     main {
       display:flex;
-      flex-direction: row;
+      flex-direction: column;
       flex-wrap: wrap;
       justify-content: center;
-      align-content: space-between;
-      margin: 0 5em;
+    }
+
+    header {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1240px;
+      padding: 1.5em 0;
+      margin: 0 auto;
     }
 `;
 

@@ -8,19 +8,21 @@ import { HousingContext } from '../../utils/context';
 
 // Le conteneur de la bannière image et titre
 const Container = styled.div`
+  display: flex;
+  justify-content: center;
   position: relative;
-  width: 100%;
-  max-width: 1240px;
 `;
 
 // L'image d'entête mer et falaise
 const Banner = styled.img`
   height: 223px;
+  max-width: 1236px;
   width: 100%;
   border-radius: 0.5em;
   object-fit: cover;
   object-position: 50% 20%;
   filter: brightness(70%);
+  margin-auto: 0 auto;
 `;
 
 // Le titre
@@ -46,7 +48,7 @@ const CardWrapper = styled.div`
   padding: 4em 3em;
   max-width: 1240px;
   border-radius: 0.5em;
-  margin: 2em 0;
+  margin: 2em auto;
 `;
 
 const LoaderWrapper = styled.div`
@@ -60,7 +62,7 @@ const LoaderWrapper = styled.div`
 function Home() {
   const { isDataLoading, housingData, error } = useContext(HousingContext);
   // Permet d'afficher l'animation lors du chargement des données
-  const [seconds, setSeconds] = useState(1);
+  const [seconds, setSeconds] = useState(1); // 1s
   // Temporiser avant d'afficher les logements
   useEffect(() => {
     console.log(`setInterval(${seconds})`);

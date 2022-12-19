@@ -1,14 +1,19 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import colors from './colors';
 import styled, { keyframes } from 'styled-components';
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(NavLink)`
   color: ${colors.primary};
-  text-decoration: none;
-  font-size: 24px;
-  margin: 0 32px;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  margin: 0 1em;
   text-align: center;
+  text-decoration: none;
+  text-underline-offset: 0.5em;
   cursor: pointer;
+  &.${(props) => props.activeClassName} {
+    text-decoration: underline;
+  }
 `;
 
 const rotate = keyframes`

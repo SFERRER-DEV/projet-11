@@ -2,13 +2,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledLink } from '../../utils/style/Atoms';
 import logo from '../../assets/logo.svg';
-import colors from '../../utils/style/colors';
 
 const NavContainer = styled.nav`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0 5em;
   padding: 2em 0;
 `;
 
@@ -18,15 +17,19 @@ const HomeLogo = styled.img`
 
 function Header() {
   return (
-    <NavContainer>
+    <header>
       <Link to="/">
         <HomeLogo src={logo} />
       </Link>
-      <div>
-        <StyledLink to="/">Accueil</StyledLink>
-        <StyledLink to="/About">A Propos</StyledLink>
-      </div>
-    </NavContainer>
+      <NavContainer>
+        <StyledLink activeClassName="navlink" to="/home">
+          Accueil
+        </StyledLink>
+        <StyledLink activeClassName="navlink" to="/About">
+          A Propos
+        </StyledLink>
+      </NavContainer>
+    </header>
   );
 }
 

@@ -23,6 +23,9 @@ root.render(
           <Route exact path="/">
             <Home />
           </Route>
+          <Route path="/Home">
+            <Home />
+          </Route>
           <Route path="/About">
             <About />
           </Route>
