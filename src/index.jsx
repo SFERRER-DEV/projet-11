@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Housing from './pages/Housing';
 import About from './pages/About';
+import NotFoundPage from './pages/NotFoundPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Error from './components/Error';
 import './styles/index.css';
 import GlobalStyle from './utils/style/GlobalStyle';
 import { HousingProvider } from './utils/context';
@@ -23,14 +23,17 @@ root.render(
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/housing">
-            <Housing />
-          </Route>
           <Route path="/About">
             <About />
           </Route>
-          <Route>
-            <Error />
+          <Route path="/housing/:housingId">
+            <Housing />
+          </Route>
+          <Route path="/housing/:housingId">
+            <NotFoundPage />
+          </Route>
+          <Route path="*">
+            <NotFoundPage />
           </Route>
         </Switch>
         <Footer />
