@@ -22,12 +22,11 @@ function Housing() {
   const [accomodation, setAccomodation] = useState({});
   const [isError404, setError404] = useState(false);
 
-  // Recherche de l'annonce avec l'identifiant qui se trouve dans l'URL.
-  const findAccomodation = (housingId) => {
-    return housingData.find((housing) => housing.id === housingId);
-  };
-
   useEffect(() => {
+    // Recherche de l'annonce avec l'identifiant qui se trouve dans l'URL.
+    const findAccomodation = (housingId) => {
+      return housingData.find((housing) => housing.id === housingId);
+    };
     if (housingData.length > 0) {
       const found = findAccomodation(housingId);
       if (found !== undefined && Object.keys(found).length > 0) {
@@ -36,7 +35,7 @@ function Housing() {
         setError404(true);
       }
     }
-  }, [isDataLoading]);
+  }, [isDataLoading, housingData, housingId]);
 
   return (
     <section>
@@ -50,7 +49,20 @@ function Housing() {
             title={accomodation.host.name}
             photos={accomodation.pictures}
           />
-          <Accomodation name={accomodation.host.name} />
+          <Accomodation
+            title={accomodation.title}
+            location={accomodation.location}
+            name={accomodation.host.name}
+            picture={accomodation.host.picture}
+            description={accomodation.description}
+            tags={accomodation.tags}
+            equipments={accomodation.equipments}
+            rating={
+              isNaN(parseInt(accomodation.rating))
+                ? 0
+                : parseInt(accomodation.rating)
+            }
+          />
         </div>
       ) : isError404 ? (
         <Redirect to="/NotFoundPage" />
