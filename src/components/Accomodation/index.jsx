@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import colors from '../../utils/style/colors';
+import Rating from '../../components/Rating';
 
 // Le conteneur de la dropdown
 const Container = styled.article`
@@ -48,6 +49,8 @@ const Tags = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: 2.5em;
+  align-items: center;
   border: 1px blue dotted;
 `;
 
@@ -103,10 +106,6 @@ const Owner = styled.div`
   }
 `;
 
-const Stars = styled.div`
-  border: 1px blue dotted;
-`;
-
 const Complement = styled.div`
   border: 1px red dotted;
 `;
@@ -138,7 +137,7 @@ function Accomodation({
             <p>{name}</p>
             <img src={picture} alt={`portrait ${name}}`} />
           </Owner>
-          <Stars>{rating}</Stars>
+          <Rating rating={rating} />
         </Wrapper>
       </Informations>
       <Complement>
