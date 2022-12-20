@@ -65,14 +65,11 @@ function Home() {
   const [seconds, setSeconds] = useState(1); // 1s
   // Temporiser avant d'afficher les logements
   useEffect(() => {
-    console.log(`setInterval(${seconds})`);
     const interval = setInterval(() => {
       if (seconds > 0) setSeconds((seconds) => seconds - 1);
     }, 1000);
     return () => clearInterval(interval);
   }, [seconds]);
-
-  console.log(`Home: ${isDataLoading}`);
 
   if (error) {
     return <span>Oups il y a eu un problème</span>;

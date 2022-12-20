@@ -7,27 +7,49 @@ export const HousingProvider = ({ children }) => {
   const [isDataLoading, setDataLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    async function fetchHousing() {
-      setDataLoading(true);
-      try {
-        console.log(`Context 1: ${isDataLoading}`);
-        const response = await fetch(`/data/logements.json`);
-        const { housingData } = await response.json();
-        setHousingData(housingData);
-      } catch (err) {
-        console.log(err);
-        setError(true);
-      } finally {
-        setDataLoading(false);
-        console.log(`Context 2: ${isDataLoading}`);
-      }
+  async function fetchHousing() {
+    setDataLoading(true);
+    try {
+      const response = await fetch(`/data/logements.json`);
+      const { data } = await response.json();
+      setHousingData(data);
+    } catch (err) {
+      console.log(err);
+      setError(true);
+    } finally {
+      setDataLoading(false);
     }
+  }
+
+  // function fetchHousing() {
+  //   setDataLoading(true);
+  //   fetch(`/data/logements.json`).then((response) =>
+  //     response
+  //       .json()
+  //       .then(({ data }) => {
+  //         setHousingData(data);
+  //         setDataLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         setError(true);
+  //         console.log(error);
+  //       })
+  //   );
+  // }
+
+  useEffect(() => {
     fetchHousing();
   }, []);
 
   return (
-    <HousingContext.Provider value={{ housingData, isDataLoading, error }}>
+    <HousingContext.Provider
+      value={{
+        housingData,
+        setHousingData,
+        isDataLoading,
+        error,
+      }}
+    >
       {children}
     </HousingContext.Provider>
   );
