@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import colors from './colors';
 import styled, { keyframes } from 'styled-components';
 
-export const StyledLink = styled(NavLink)`
+export const StyledLink1 = styled(NavLink)`
   color: ${colors.primary};
   text-transform: uppercase;
   font-size: 1.5em;
@@ -12,6 +12,18 @@ export const StyledLink = styled(NavLink)`
   text-underline-offset: 0.5em;
   cursor: pointer;
   &.${(props) => props.activeClassName} {
+    text-decoration: underline;
+  }
+`;
+
+export const StyledLink2 = styled(NavLink)`
+  color: ${colors.primary};
+  text-align: center;
+  text-underline-offset: 0.5em;
+  cursor: pointer;
+  text-decoration: none;
+  text-underline-offset: 0.5em;
+  &:hover {
     text-decoration: underline;
   }
 `;

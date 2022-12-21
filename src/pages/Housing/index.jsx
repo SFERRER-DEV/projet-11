@@ -12,7 +12,7 @@ const LoaderWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  height: 15em;
+  height: 11em;
 `;
 
 function Housing() {

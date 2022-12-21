@@ -7,7 +7,8 @@ const StyledGlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
-    body {
+    html, body {
+      font-size: 16px;
       font-family: 'Montserrat', sans-serif;
     }
 
@@ -15,19 +16,13 @@ const StyledGlobalStyle = createGlobalStyle`
       display:flex;
       flex-direction: column;
       flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    header {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: start;
       align-items: center;
-      width: 100%;
-      max-width: 1240px;
-      padding: 1.5em 0;
-      margin: 0 auto;
+      flex-grow: 1;
+      padding: 0 1em;
+      @media (max-width:767px) {
+        font-size: 0.85em;
+      }
     }
 `;
 

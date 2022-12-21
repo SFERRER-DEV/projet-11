@@ -8,9 +8,13 @@ import { HousingContext } from '../../utils/context';
 
 // Le conteneur de la bannière image avec titre
 const Container = styled.section`
-  display: flex;
-  justify-content: center;
   position: relative;
+  display: flex;
+  flex-direction: row;
+  row-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `;
 
 // L'image d'entête océan et falaises
@@ -29,13 +33,19 @@ const Banner = styled.img`
 const Heading = styled.h1`
   position: absolute;
   z-index: 100;
-  top: 40%;
+  max-width: 1240px;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   font-size: 3em;
+  @media (max-width: 767px) {
+    font-size: 2em;
+  }
   font-weight: 500;
   color: ${colors.secondary};
-  display: flex;
-  justify-content: center;
+  padding: 0 1em;
 `;
 
 // Le sablier d'attente pour le chargement des données
@@ -49,16 +59,30 @@ const LoaderWrapper = styled.div`
 
 // La partie contenant toutes les html cards des logements
 const CardWrapper = styled.section`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 3em;
-  column-gap: 3em;
+  margin: 2em auto;
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 1em 0.5em;
+  }
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2em 1em;
+    row-gap: 1em;
+    column-gap: 1em;
+  }
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 4em 3em;
+    row-gap: 3em;
+    column-gap: 3em;
+  }
   width: 100%;
-  background-color: ${colors.tertiary};
-  padding: 4em 3em;
   max-width: 1240px;
   border-radius: 0.5em;
-  margin: 2em auto;
+  background-color: ${colors.tertiary};
 `;
 
 function Home() {

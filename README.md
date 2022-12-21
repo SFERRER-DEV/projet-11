@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Projet Kasa
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Présentation
 
-## Available Scripts
+Développez une application Web avec React et React Router pour la formation Openclassrooms de développeur d'application JS React.
+Kasa est le projet numéro 11 de la formation.
 
-In the project directory, you can run:
+## L'architecture du projet
 
-### `npm start`
+- Ce projet a été initialisé avec [Create React App](https://github.com/facebook/create-react-app).
+- La bibliothèque React Router v5.3.4 permet de gérer la navigation.
+- Les données affichées proviennent du fichier logements.json placé dans le dossier public/data/
+- Les données des annonces de logeements sont partagées globalement par le contexte HousingContext
+- Le Provider HousingProvider est placé au niveau du router et englobe les pages: Toutes les annonces sont contextualisées sur toutes les pages.
+- Les composants React créés pour Kasa:
+  - L'entête et le pied des pages sont des composants.
+  - Dropdown: Permet d'afficher des boites qui se déplient pour lire un paragraphe.
+  - Carousel: Un aarrousel pour faire défiler les photographies d'une annonce dans des slides.
+  - CardHousing: Une carte HTML pour présenter le titre et la photo de couverture d'une annonce.
+  - Rating: Présente une note de 0 à 5 sous forme d'étoiles pleines ou vides.
+  - Accomodation: Les propriétés de ce composant affichent les données texte d'une annonce. Il imbrique un composant Rating et deux composants Dropbox.
+- Les styles CSS sont définis en JS in CSS avec la bibliothèque Styled Components.
+  - Un style global est ajouté pour toutes les pages au niveau du Routeur.
+  - Les styles spécifiques sont écrits au niveau des composants.
+- Un fichier CSS externe styles/index.css est aussi lié à la page principale.
+- Le codebase est mis en forme par l'extension Prettier et est vérifié par ESLint.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Scripts
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dans le répertoire du projet, vous pouvez exécuter : `npm start`
+Lancer l'application en mode développement. Ouvrez [http://localhost:3000](http://localhost:3000) pour l'afficher dans votre navigateur.

@@ -10,7 +10,6 @@ const Container = styled.div`
   height: 2em;
   align-items: flex-end;
   font-size: 1.75em;
-  border: 1px red dotted;
 `;
 
 const StarFull = styled.i`

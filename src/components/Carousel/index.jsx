@@ -7,7 +7,9 @@ import {
 import styled from 'styled-components';
 import colors from '../../utils/style/colors';
 
+// Le conteneur du slideshow
 const Container = styled.section`
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -16,35 +18,66 @@ const Container = styled.section`
   align-items: center;
   font-size: 3em;
   color: ${colors.secondary};
+  @media (max-width: 767px) {
+    padding: 0 0.5em;
+    font-size: 1.8em;
+  }
 `;
 
+// Un slide
 const Slide = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 `;
 
+// La photographie dans le slide
 const Photo = styled.img`
   object-fit: cover;
   border-radius: 0.5em;
   height: 415px;
-  width: 1240px;
+  @media (max-width: 767px) {
+    height: 255px;
+  }
+  max-width: 1240px;
+  width: 100%;
 `;
 
+// Le conteneur des boutons
+const Wrapper = styled.div`
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  max-width: 1240px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  @media (max-width: 767px) {
+    padding: 0 0.5em;
+  }
+`;
+// Bouton slide précédent <
 const Previous = styled.i`
-  position: absolute;
-  z-index: 99;
   cursor: pointer;
-  left: 4em;
   user-select: none;
+  margin-left: 1em;
+  @media (max-width: 767px) {
+    margin-left: 0.25em;
+  }
 `;
-//top: 10em;
+
+// Bouton slide suivant >
 const Next = styled.i`
-  position: absolute;
-  z-index: 99;
   cursor: pointer;
-  right: 4em;
   user-select: none;
+  margin-right: 1em;
+  @media (max-width: 767px) {
+    margin-right: 0.25em;
+  }
 `;
-// top: 10em;
 
 function Carousel({ title, photos }) {
   // Le nombre de photos de l'annonce
@@ -68,16 +101,18 @@ function Carousel({ title, photos }) {
   return (
     // N'afficher les flèches < > que si il y a plusieurs photos
     <Container className="carousel">
-      {length > 1 ? (
-        <Previous onClick={previousPhoto} alt="Precedent">
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </Previous>
-      ) : null}
-      {length > 1 ? (
-        <Next onClick={nextPhoto} alt="Suivant">
-          <FontAwesomeIcon icon={faChevronRight} />
-        </Next>
-      ) : null}
+      <Wrapper>
+        {length > 1 ? (
+          <Previous onClick={previousPhoto} alt="Precedent">
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </Previous>
+        ) : null}
+        {length > 1 ? (
+          <Next onClick={nextPhoto} alt="Suivant">
+            <FontAwesomeIcon icon={faChevronRight} />
+          </Next>
+        ) : null}
+      </Wrapper>
       {photos.map((photo, index) => {
         return (
           <Slide key={`carousel-${index}`}>

@@ -5,9 +5,11 @@ import colors from '../../utils/style/colors';
 const Container = styled.article`
   position: relative;
   margin: 0 auto;
+  @media (max-width: 767px) {
+    margin: 0.5em;
+  }
   transform: scale(1);
   transition-duration: 0.5s;
-  width: 20em;
   &:hover {
     transform: scale(1.05);
     transition-duration: 0.5s;
@@ -17,6 +19,9 @@ const Container = styled.article`
 const Cover = styled.img`
   width: 100%;
   height: 20em;
+  @media (max-width: 767px) {
+    height: 12em;
+  }
   object-fit: cover;
   border-radius: 0.5em;
   filter: brightness(70%);
