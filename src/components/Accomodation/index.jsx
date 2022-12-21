@@ -2,24 +2,27 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import colors from '../../utils/style/colors';
 import Rating from '../../components/Rating';
+import Dropdown from '../../components/Dropdown';
 
-// Le conteneur de la dropdown
+// Le conteneur des deux parties de l'annonce
 const Container = styled.article`
   padding: 5em;
   width 100%;
   display: flex;
   display-direction: column;
   flex-wrap: wrap;
-  border: 3px red dotted;
 `;
 
+// 1ere partie principale de l'annonce
 const Informations = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  width: 100%;
   border: 3px blue dotted;
 `;
 
+// Coté gauche de la partie principale de l'annonce : titre, localisation, étiquettes
 const Detail = styled.div`
   display: flex;
   flex-direction: row;
@@ -72,6 +75,7 @@ const Tag = styled.p`
   border: 1px red dotted;
 `;
 
+// Coté à droite de la partie principale de l'annonce : propriétaire et notation
 const Wrapper = styled.div`
   flex-basis: 50%;
   flex-shrink: 1;
@@ -89,12 +93,12 @@ const Owner = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   border: 1px blue dotted;
-  & img {
+  & > img {
     height: 5em;
     width: 5em;
     border-radius: 100%;
   }
-  & p {
+  & > p {
     margin-right: 1em;
     color: ${colors.primary};
     font-size: 1.125em;
@@ -106,8 +110,16 @@ const Owner = styled.div`
   }
 `;
 
+// 2nd partie de l'annonce pour afficher les deux composants Dropdown: Description et Équipements
 const Complement = styled.div`
-  border: 1px red dotted;
+  display: grid;
+  grid-template-columns: 45% 45%;
+  justify-content: space-between;
+  column-gap: 3em;
+  & p {
+    font-size: 1.5em;
+  }
+  border: 3px blue dotted;
 `;
 
 function Accomodation({
@@ -141,12 +153,8 @@ function Accomodation({
         </Wrapper>
       </Informations>
       <Complement>
-        <p>{description}</p>
-        <ul>
-          {equipments.map((equipement, index) => (
-            <li key={`equipement-${index}`}>{equipement}</li>
-          ))}
-        </ul>
+        <Dropdown key={1001} title="Description" description={description} />
+        <Dropdown key={1002} title="Équipements" description={equipments} />
       </Complement>
     </Container>
   );

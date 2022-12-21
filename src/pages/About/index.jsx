@@ -25,6 +25,8 @@ const Section = styled.section`
 `;
 
 function About() {
+  // Changer la hauteur par défaut du paragraphe dans le composant Dropown : -1 < Dropown.SIZE_HEIGHT  implique la hauteur sera fit-content
+  const height = -1;
   return (
     <main>
       <Container>
@@ -38,6 +40,7 @@ function About() {
             key={1000 + index}
             title={title}
             description={description}
+            height={height}
           />
         ))}
       </Section>
