@@ -11,7 +11,7 @@ export const HousingProvider = ({ children }) => {
     setDataLoading(true);
     try {
       const response = await fetch(`/data/logements.json`);
-      const { data } = await response.json();
+      const data = await response.json();
       setHousingData(data);
     } catch (err) {
       console.log(err);
@@ -26,7 +26,7 @@ export const HousingProvider = ({ children }) => {
   //   fetch(`/data/logements.json`).then((response) =>
   //     response
   //       .json()
-  //       .then(({ data }) => {
+  //       .then((data) => {
   //         setHousingData(data);
   //         setDataLoading(false);
   //       })
@@ -48,6 +48,7 @@ export const HousingProvider = ({ children }) => {
         setHousingData,
         isDataLoading,
         error,
+        setError,
       }}
     >
       {children}
