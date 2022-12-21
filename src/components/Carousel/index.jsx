@@ -7,7 +7,7 @@ import {
 import styled from 'styled-components';
 import colors from '../../utils/style/colors';
 
-const Container = styled.div`
+const Container = styled.section`
   position: relative;
   display: flex;
   flex-direction: row;

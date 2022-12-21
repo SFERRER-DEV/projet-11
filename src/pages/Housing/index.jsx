@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import colors from '../../utils/style/colors';
+//import colors from '../../utils/style/colors';
 import { HousingContext } from '../../utils/context';
 import Carousel from '../../components/Carousel';
 import Accomodation from '../../components/Accomodation';
@@ -35,40 +35,33 @@ function Housing() {
         setError404(true);
       }
     }
-  }, [isDataLoading, housingData, housingId]);
+  }, [housingData, housingId, isDataLoading]);
 
-  return (
-    <section>
-      {isDataLoading ? (
-        <LoaderWrapper>
-          <Loader />
-        </LoaderWrapper>
-      ) : Object.keys(accomodation).length > 0 ? (
-        <div>
-          <Carousel
-            title={accomodation.host.name}
-            photos={accomodation.pictures}
-          />
-          <Accomodation
-            title={accomodation.title}
-            location={accomodation.location}
-            name={accomodation.host.name}
-            picture={accomodation.host.picture}
-            description={accomodation.description}
-            tags={accomodation.tags}
-            equipments={accomodation.equipments}
-            rating={
-              isNaN(parseInt(accomodation.rating))
-                ? 0
-                : parseInt(accomodation.rating)
-            }
-          />
-        </div>
-      ) : isError404 ? (
-        <Redirect to="/NotFoundPage" />
-      ) : null}
-    </section>
-  );
+  return isDataLoading ? (
+    <LoaderWrapper>
+      <Loader />
+    </LoaderWrapper>
+  ) : Object.keys(accomodation).length > 0 ? (
+    <main>
+      <Carousel title={accomodation.host.name} photos={accomodation.pictures} />
+      <Accomodation
+        title={accomodation.title}
+        location={accomodation.location}
+        name={accomodation.host.name}
+        picture={accomodation.host.picture}
+        description={accomodation.description}
+        tags={accomodation.tags}
+        equipments={accomodation.equipments}
+        rating={
+          isNaN(parseInt(accomodation.rating))
+            ? 0
+            : parseInt(accomodation.rating)
+        }
+      />
+    </main>
+  ) : isError404 ? (
+    <Redirect to="/NotFoundPage" />
+  ) : null;
 }
 
 export default Housing;

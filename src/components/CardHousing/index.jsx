@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from '../../utils/style/colors';
 
-const Container = styled.div`
+const Container = styled.article`
   position: relative;
   margin: 0 auto;
   transform: scale(1);
