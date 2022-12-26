@@ -25,6 +25,10 @@ Kasa est le projet numéro 11 de la formation.
 - Un fichier CSS externe styles/index.css est aussi lié à la page principale.
 - Le codebase est mis en forme par l'extension Prettier et est vérifié par ESLint.
 
+## Liens
+
+- Voir le site web sur la plateforme Vercel.com: [Openclassrooms projet 11: Kasa](https://projet-11-gm0imnzhe-sferrer-dev.vercel.app/)
+
 ## Scripts
 
 Dans le répertoire du projet, vous pouvez exécuter : `npm start`
