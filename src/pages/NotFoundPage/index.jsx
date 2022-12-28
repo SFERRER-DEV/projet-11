@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from '../../utils/style/colors';
 import { StyledLink2 } from '../../utils/style/Atoms';
 
-// Le conteneur des éléments html de la page
+/** @type {Object} Le conteneur des éléments html de la page est une balise `section` */
 const Container = styled.section`
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@ const Container = styled.section`
   }
 `;
 
-// Le titre 404
+/** @type {Object} Le code erreur 404 est une balise `h1` */
 const Heading = styled.h1`
   display: flex;
   flex-wrap: wrap;
@@ -34,7 +34,7 @@ const Heading = styled.h1`
   color: ${colors.primary};
 `;
 
-// Sous-titre
+/** @type {Object} Le sous-titre est une balise `h2` */
 const SubHeading = styled.h2`
   display: flex;
   flex-wrap: wrap;
@@ -46,6 +46,10 @@ const SubHeading = styled.h2`
   color: ${colors.primary};
 `;
 
+/**
+ * Page erreur 404: une annonce n'a pas été trouvée avec un identifiant
+ * @returns {JSX.Element} La page Home
+ */
 function NotFoundPage() {
   return (
     <main>

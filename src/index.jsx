@@ -12,7 +12,6 @@ import GlobalStyle from './utils/style/GlobalStyle';
 import { HousingProvider } from './utils/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 root.render(
   <React.StrictMode>
     <Router>

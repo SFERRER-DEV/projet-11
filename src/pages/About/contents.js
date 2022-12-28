@@ -1,3 +1,4 @@
+/** @type {Array.<{title: string, description: string}>} Le contenu de texte à afficher dans les composants Dropdown de la page About*/
 export const ABOUT_CONTENTS = [
   {
     title: 'Fiabilité',

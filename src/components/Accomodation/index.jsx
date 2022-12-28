@@ -1,10 +1,10 @@
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import colors from '../../utils/style/colors';
-import Rating from '../../components/Rating';
+import Ratings from '../Ratings';
 import Dropdown from '../../components/Dropdown';
+import styled from 'styled-components';
+import colors from '../../utils/style/colors';
 
-// Le conteneur des deux parties de l'annonce
+/** @type {Object} Le conteneur des deux parties de l'annonce est une balise `<article>` */
 const Container = styled.article`
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@ const Container = styled.article`
   }
 `;
 
-// 1ere partie principale de l'annonce
+/** @type {Object} La première partie de l'annonce est une balise `<div>` */
 const Informations = styled.div`
   display: flex;
   flex-direction: row;
@@ -33,7 +33,7 @@ const Informations = styled.div`
   width: 100%;
 `;
 
-// Coté gauche de la partie principale de l'annonce : titre, localisation, étiquettes
+/** @type {Object} Le coté gauche de la partie principale est une balise `<div>` qui affiche le titre, la localisation et des étiquettes*/
 const Detail = styled.div`
   display: flex;
   flex-direction: row;
@@ -42,12 +42,15 @@ const Detail = styled.div`
   flex-grow: 1;
 `;
 
+/** @type {Object} Le titre de l'annonce est une balise `<h2>` */
 const Heading = styled.h2`
   width: 100%;
   color: ${colors.primary};
   font-size: 2em;
   font-weight: 500;
 `;
+
+/** @type {Object} Le sous-titre de l'annonce est une balise `<p>` qui affiche la localisation */
 const SubHeading = styled.p`
   width: 100%;
   color: ${colors.primary};
@@ -55,6 +58,7 @@ const SubHeading = styled.p`
   margin: 1em 0;
 `;
 
+/** @type {Object} Les étiquettes de l'annonce sont contenues dans une balise `<div>` */
 const Tags = styled.div`
   display: flex;
   flex-direction: row;
@@ -62,6 +66,7 @@ const Tags = styled.div`
   width: 100%;
 `;
 
+/** @type {Object} Une étiquette est un ou des mots dans une balise `<p>` */
 const Tag = styled.p`
   display: -webkit-box;
   flex-grow: 0;
@@ -82,7 +87,7 @@ const Tag = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-// Coté à droite de la partie principale de l'annonce : propriétaire et notation
+/** @type {Object} Le coté droit de la partie principale est une balise `<div>` qui affiche le portrait, le nom de l'hôte ainsi que sa note dans un composant Ratings */
 const Wrapper = styled.div`
   display: flex;
   @media (max-width: 767px) {
@@ -101,8 +106,8 @@ const Wrapper = styled.div`
   margin: 0.5em 0;
 `;
 
-// Le portrait et le nom de l'annonceur
-const Owner = styled.div`
+/** @type {Object} Le conteneur du portrait et du nom de l'hôte est une balise `<div>` */
+const Host = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -125,7 +130,7 @@ const Owner = styled.div`
   }
 `;
 
-// 2nd partie de l'annonce pour afficher les deux composants Dropdown: Description et Équipements
+/** @type {Object} La seconde partie de l'annonce est une balise `<div>` qui affiche deux composants Dropdown pour la description et les équipements */
 const Complement = styled.div`
   @media (max-width: 767px) {
     flex-direction: column;
@@ -137,17 +142,31 @@ const Complement = styled.div`
   }
   margin-top: 1em;
 `;
+/**
+ * Un composant pour afficher les informations de texte d'une annonce avec le portrait et la note de l'annonceur
+ * @param {Object} props
+ * @param {string} props.title Le titre de l'annonce
+ * @param {string} props.location La localisation de l'annonce
+ * @param {string} props.name Le nom de l'hôte
+ * @param {string} props.picture L'url de lu protrait de l'hôte
+ * @param {string} props.description La description de l'annonce qui sera affiché avec un composant Dropdown
+ * @param {Array.<string>} props.tags Un tableau d'étiquettes de texte
+ * @param {Array.<string>} props.equipments Un tableau des équipements de l'annonce qui seront affichés avec un composant Dropdown
+ * @param {number} props.rating La note sur 5 qui sera affichée avec un composant Ratings
+ * @returns {React.ReactElement} Un composant Accomodation
+ */
+function Accomodation(props) {
+  const {
+    title,
+    location,
+    name,
+    picture,
+    description,
+    tags,
+    equipments,
+    rating,
+  } = props;
 
-function Accomodation({
-  title,
-  location,
-  name,
-  picture,
-  description,
-  tags,
-  equipments,
-  rating,
-}) {
   return (
     <Container className="accomodation">
       <Informations>
@@ -161,11 +180,11 @@ function Accomodation({
           </Tags>
         </Detail>
         <Wrapper>
-          <Owner>
+          <Host>
             <p>{name}</p>
-            <img src={picture} alt={`portrait ${name}}`} />
-          </Owner>
-          <Rating rating={rating} />
+            <img src={picture} alt={`portrait de l'hôte ${name}}`} />
+          </Host>
+          <Ratings rating={rating} />
         </Wrapper>
       </Informations>
       <Complement>

@@ -5,11 +5,10 @@ import colors from '../../utils/style/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-// Cette constante définit par défaut la hauteur du paragraphe du composant en unité de mesure em
-// Si la propriété height est spécifiée et strictement inférieure à SIZE_HEIGHT alors la hauteur du paragraphe sera fit-content.
+/** @const {number} Définir par défaut à 12em la hauteur du paragraphe du composant Dropdown*/
 const SIZE_HEIGHT = 12;
 
-// Le conteneur de la dropdown
+// Le conteneur du composant Dropdown
 const Container = styled.div`
   width 100%;
   margin-left: auto;
@@ -24,7 +23,10 @@ const Container = styled.div`
   }
   background-color: ${({ size }) =>
     size >= SIZE_HEIGHT ? colors.tertiary : 'transparent'};
-  padding-bottom: ${({ size }) => (size >= SIZE_HEIGHT ? '1em' : '0em')};
+  padding-bottom: ${
+    /** Quand la Dropdown est fermée alors size = 0 et il ne doit pas y avoir de padding */
+    ({ size }) => (size >= SIZE_HEIGHT ? '1em' : '0em')
+  };
 `;
 
 // Le bouton de titre avec son chevron
@@ -50,18 +52,33 @@ const Description = styled.p`
   -webkit-box-orient: vertical;
   overflow: hidden;
   @media (max-width: 767px) {
-    padding: ${({ size }) => (size === 0 ? '0em' : '0.5em')};
-    height: ${({ size }) => (size === 0 ? '0em' : 'fit-content')};
+    padding: ${
+      /** Quand la Dropdown est fermée alors size = 0 et il ne doit pas y avoir de padding */
+      ({ size }) => (size === 0 ? '0em' : '0.5em')
+    };
+    height: ${
+      /** Mobile : Si la Dropdown est ouverte alors la hauteur du paragraphe est fit-content */
+      ({ size }) => (size === 0 ? '0em' : 'fit-content')
+    };
   }
   @media (min-width: 768px) {
     -webkit-line-clamp: 10;
-    padding: ${({ size }) => (size === 0 ? '0em' : '1em')};
-    height: ${({ size }) =>
-      size === 0
-        ? '0em'
-        : ({ size }) => (size >= SIZE_HEIGHT ? `${size}em` : 'fit-content')};
+    padding: ${
+      /** Quand la Dropdown est fermée alors size = 0 et il ne doit pas y avoir de padding */
+      ({ size }) => (size === 0 ? '0em' : '1em')
+    };
+    height: ${
+      /** Desktop : Quand la props height est spécifiée mais < à SIZE_HEIGHT alors la hauteur du paragraphe est fit-content */
+      ({ size }) =>
+        size === 0
+          ? '0em'
+          : ({ size }) => (size >= SIZE_HEIGHT ? `${size}em` : 'fit-content')
+    };
   }
-  white-space: ${({ isFlatten }) => (isFlatten ? 'pre' : 'normal')};
+  white-space: ${
+    /** Le texte à afficher peut contenir des sauts de lignes */
+    ({ isFlatten }) => (isFlatten ? 'pre' : 'normal')
+  };
   transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;
 `;
 
@@ -71,15 +88,26 @@ const Chevron = styled.i`
   transform: rotate(${({ rotation }) => rotation}deg);
 `;
 
-function Dropdown({ title, description, height }) {
-  // Le texte à afficher dans le paragraphe du composant
+/**
+ * Un composant pour afficher un texte se dépliant (collapse)
+ * @param {Object} props
+ * @param {string} props.title Le titre affiché dans le composant Dropdown
+ * @param {string | Array.<string>} props.description Le texte à afficher est une chaine de caractère ou un tableau de chaines
+ * @param {number} props.height La hauteur du composant Dropdown en unité de mesure em
+ * @returns {React.ReactElement} Un composant Dropdown
+ */
+function Dropdown(props) {
+  const { title, description, height } = props;
+  /** @type {string} Le texte à afficher dans le paragraphe du composant Dropdown */
   let strContent = '';
-  // Ceci définit l'état initial du collapse.
-  const [active, setActive] = useState(true);
-  // La hauteur initiale du paragraphe
-  const [size, setSize] = useState(0);
-  // Si la description est un tableau de chaines de caractères alors il devra être applati.
+  /** @type {boolean }  Si la description est un tableau de chaines de caractères alors il a devra être applati. */
   let isFlatten = false;
+
+  // Ceci définit l'état initial du collapse : fermer
+  const [active, setActive] = useState(true);
+  // La hauteur initiale du paragraphe : masquer
+  const [size, setSize] = useState(0);
+
   if (Array.isArray(description)) {
     // Ce flag est ulisé dans le CSS in JS pour présenter correctement les sauts des lignes
     isFlatten = true;
@@ -90,7 +118,9 @@ function Dropdown({ title, description, height }) {
     strContent = description;
   }
 
-  // La fonction qui bascule le collapse
+  /**
+   *  Une fonction pour basculer le collapse
+   */
   function togglecollapse() {
     setActive(!active);
     // Le paragraphe change de dimension, l'unité de mesure utilisée est le em
@@ -114,7 +144,7 @@ function Dropdown({ title, description, height }) {
 
 Dropdown.propTypes = {
   title: PropTypes.string.isRequired,
-  // La propriété description est de type chaine de carcatères mais peut être aussi un tableau de chaines de carcatères
+  // La props description est de type chaine de caractères mais peut être aussi un tableau de chaines de caractères(pour les équipements)
   description: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
@@ -123,7 +153,7 @@ Dropdown.propTypes = {
 };
 
 Dropdown.defaultProps = {
-  // Si aucune valeur est passée en propriété alors la hauteur utilisée est celle de la constante définie au début de ce fichier
+  // Si aucune valeur est passée en props alors la hauteur utilisée est la valeur de la constante définie au début de ce fichier
   height: SIZE_HEIGHT,
 };
 

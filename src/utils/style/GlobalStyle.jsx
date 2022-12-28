@@ -16,9 +16,9 @@ const StyledGlobalStyle = createGlobalStyle`
       display:flex;
       flex-direction: column;
       flex-wrap: wrap;
+      flex-grow: 1;
       justify-content: start;
       align-items: center;
-      flex-grow: 1;
       padding: 0 1em;
       @media (max-width:767px) {
         font-size: 0.85em;

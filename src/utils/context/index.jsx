@@ -1,12 +1,25 @@
 import React, { useState, useEffect, createContext } from 'react';
+/** @typedef {import('../../utils/context/typedef').AccomodationJSON} AccomodationJSON Raccourci pour importer les types des données JSON d'une annonce*/
 
 export const HousingContext = createContext();
 
 export const HousingProvider = ({ children }) => {
+  /** @type {[AccomodationJSON, Function]} */
   const [housingData, setHousingData] = useState([]);
-  const [isDataLoading, setDataLoading] = useState(false);
-  const [error, setError] = useState(false);
+  /**
+   * @typedef {boolean} isDataLoading Ees données sont-elle entrain de se charger ?
+   */
+  const [/** @type {isDataLoading} */ isDataLoading, setDataLoading] =
+    useState(false);
 
+  /**
+   * @typedef {boolean} error Est-ce qu'une erreur est survenue lors du chargement ?
+   */
+  const [/** @type {error} */ error, setError] = useState(false);
+
+  /**
+   * Charger les données JSON du fichier des annonces de logements
+   */
   async function fetchHousing() {
     setDataLoading(true);
     try {
@@ -20,22 +33,6 @@ export const HousingProvider = ({ children }) => {
       setDataLoading(false);
     }
   }
-
-  // function fetchHousing() {
-  //   setDataLoading(true);
-  //   fetch(`/data/logements.json`).then((response) =>
-  //     response
-  //       .json()
-  //       .then((data) => {
-  //         setHousingData(data);
-  //         setDataLoading(false);
-  //       })
-  //       .catch((error) => {
-  //         setError(true);
-  //         console.log(error);
-  //       })
-  //   );
-  // }
 
   useEffect(() => {
     fetchHousing();

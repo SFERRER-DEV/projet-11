@@ -19,10 +19,9 @@ export const StyledLink1 = styled(NavLink)`
 export const StyledLink2 = styled(NavLink)`
   color: ${colors.primary};
   text-align: center;
-  text-underline-offset: 0.5em;
-  cursor: pointer;
   text-decoration: none;
   text-underline-offset: 0.5em;
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
@@ -37,7 +36,18 @@ const rotate = keyframes`
   }
 `;
 
-export const Loader = styled.div`
+/** @type {Object} Un conteneur pour afficher et centrer l'animation d'attente lors du chargement des données dans une balise `<div>` */
+export const LoaderWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  justify-content: center;
+  align-content: center;
+  height: 15em;
+`;
+
+/** @type {Object} Un cercle en rotation est animé dans une balise `<div>` */
+export const LoaderHourGlass = styled.div`
   border: 0.5em solid ${colors.primary};
   border-bottom-color: transparent;
   border-radius: 5em;

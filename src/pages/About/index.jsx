@@ -1,19 +1,17 @@
-import PictureBanner from '../../assets/about_banner.png';
-import styled from 'styled-components';
 import { ABOUT_CONTENTS } from './contents';
 import Dropdown from '../../components/Dropdown';
+import PictureBanner from '../../assets/about_banner.png';
+import styled from 'styled-components';
 
-// Les 4 engagements Kasa Fiablité, Sécurité, Service, Respect.
+/** @type {Objet} Le conteneur des 4 composants Dropdown est une `section` */
 const EngagementsWrapper = styled.section`
   display: flex;
   flex-direction: column;
   margin-top: 2em;
-
   @media (max-width: 767px) {
     padding: 0.5em;
     margin-top: 0.5em;
   }
-
   @media (max-width: 767px) {
     & .dropdown {
       width: 100%;
@@ -30,7 +28,7 @@ const EngagementsWrapper = styled.section`
   }
 `;
 
-// La bannière
+/** @type {Objet} La bannière d'entête est une balise `div` */
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -41,7 +39,7 @@ const Container = styled.div`
   }
 `;
 
-// L'image d'entête montagne
+/** La photo montagne dans la bannière est une balise `img` */
 const Banner = styled.img`
   height: 223px;
   width: 100%;
@@ -50,8 +48,12 @@ const Banner = styled.img`
   filter: brightness(85%);
 `;
 
+/**
+ * Page À propos de avec les 4 engagements Kasa Fiablité, Sécurité, Service, Respect
+ * @returns {JSX.Element} La page About
+ */
 function About() {
-  // Changer la hauteur par défaut du paragraphe dans le composant Dropown : -1 < Dropown.SIZE_HEIGHT  implique la hauteur sera fit-content
+  /**@type  {number} Changer la hauteur par défaut du paragraphe dans le composant Dropdown */
   const height = -1;
   return (
     <main>
@@ -59,14 +61,13 @@ function About() {
         <Banner src={PictureBanner} alt="banner" />
       </Container>
       <EngagementsWrapper>
-        {/* Le contenu des engagements à afficher est stocké dans un tableau JS */}
         {ABOUT_CONTENTS.map(({ title, description }, index) => (
           // Ajouter un engagement Kasa dans une paragraghe qui s'ouvre et se referme
           <Dropdown
             key={1000 + index}
             title={title}
             description={description}
-            height={height}
+            height={height} // -1 < Dropown.SIZE_HEIGHT alors la hauteur sera fit-content
           />
         ))}
       </EngagementsWrapper>
